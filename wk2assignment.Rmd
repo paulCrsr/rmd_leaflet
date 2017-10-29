@@ -1,0 +1,32 @@
+---
+title: "R Markdown and Leaflet Assignment"
+output: html_document
+author: paulCrsr
+date: 29th October 2017
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Simple map
+
+```{r map}
+library(leaflet)
+set.seed(234222)
+
+markers <- 
+    data.frame(
+        lat = runif(20, min = 52.20, max = 52.22),
+        lng = runif(20, min = 0.09, max = 0.14)
+    )
+
+map <- 
+    leaflet(markers) %>%
+    addTiles() %>% 
+    # setView(lat=52.21054, lng=0.11212, zoom=14) %>%
+    addSimpleGraticule(interval=0.01) %>%
+    addMarkers(clusterOptions = markerClusterOptions())
+map
+
+```
